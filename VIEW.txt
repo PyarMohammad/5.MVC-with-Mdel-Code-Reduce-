@@ -1,0 +1,56 @@
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<script src="~/jquery.min.js"></script>
+<script src="~/Employee.js"></script>
+<script src="~/Access.js"></script>
+
+
+
+<table>
+    <tr>
+        <td>Name</td>
+        <td><input type="text" id="txtname" /></td>
+    </tr>
+    <tr>
+        <td>Age</td>
+        <td><input type="text" id="txtage" /></td>
+    </tr>
+    <tr>
+        <td>DOB</td>
+        <td><input type="date" id="txtdob" /></td>
+    </tr>
+    <tr>
+        <td>Email</td>
+        <td><input type="email" id="txtemail" /></td>
+    </tr>
+    <tr>
+        <td>Password</td>
+        <td><input type="text" id="txtpsw" /></td>
+    </tr>
+    <tr>
+        <td>Confirm_Password</td>
+        <td><input type="password" id="txtcon_psw" /></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td><input type="button" id="btnsave" value="SAVE" onclick="return Access()" /></td>
+    </tr>
+</table>
+
+<table id="tbl" border="1" style="background-color: aqua; color:darkblue">
+    <tr style="background-color: red; color: white">
+        <td>Name</td>
+        <td>Age</td>
+        <td>DOB</td>
+        <td>Email</td>
+        <td>Password</td>
+        <td>Confirm_Password</td>
+        <td>Inserted_Date</td>
+        <td>Status</td>
+        <td>DELETE</td>
+        <td>Edit</td>
+    </tr>
+</table>

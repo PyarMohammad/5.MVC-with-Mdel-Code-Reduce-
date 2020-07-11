@@ -1,0 +1,19 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace mvc050720.Models
+{
+    public class Employee
+    {
+        public int ID { get; set; }
+        public string NAME { get; set; }
+        public int AGE { get; set; }
+        public string DOB { get; set; }
+        public string Email { get; set; }
+        public string PSW { get; set; }
+        public string Con_Psw { get; set; }
+
+    }
+}

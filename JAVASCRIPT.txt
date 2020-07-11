@@ -1,0 +1,90 @@
+$(document).ready(function () {
+    ShowData();
+});
+
+function Clear() {
+    $("#txtname").val("");
+    $("#txtage").val("");
+    $("#txtdob").val("");
+    $("#txtemail").val("");
+    $("#txtpsw").val("");
+    $("#txtcon_psw").val("");
+    $("#btnsave").val("SAVE");
+
+    IID = 0;
+}
+
+function SaveData() {
+    $.ajax({
+        url: 'Emp/InsertUpdate',
+        type: 'post',
+        data: { ID: IID, NAME: $("#txtname").val(), AGE: $("#txtage").val(), DOB: $("#txtdob").val(), Email: $("#txtemail").val(), PSW: $("#txtpsw").val(), Con_Psw: $("#txtcon_psw").val() },
+        success: function () {
+            ShowData();
+            Clear();
+        },
+        error: function () {
+            alert("Record not saved");
+        }
+    });
+}
+
+function ShowData() {
+    $.ajax({
+        url: 'Emp/ShowData',
+        type: 'post',
+        data: { },
+        success: function (data) {
+            data = JSON.parse(data);
+            $("#tbl").find('tr:gt(0)').remove();
+            for (var i = 0; i < data.length; i++) {
+                $("#tbl").append('<tr> <td>' + data[i].name + '</td> <td>' + data[i].age + '</td>  <td>' + data[i].dob + '</td> <td>' + data[i].email + '</td> <td>' + data[i].psw + '</td> <td>' + data[i].con_psw + '</td>  <td>' + data[i].idate + '</td> <td>' + data[i].status + '</td> <td><input type="button" id="btndelete" value="Delete" onclick="DeleteData(' + data[i].id + ')" /></td> <td><input type="button" id="btnedit" value="Edit" onclick="EditData(' + data[i].id + ')" /></td> </tr>');
+            }
+        },
+        error: function () {
+            alert("Not show the data");
+        }
+    });
+}
+
+function DeleteData(id) {
+    $.ajax({
+        url: 'Emp/DeleteData',
+        type: 'post',
+        data: { ID: id },
+        success: function () {
+            ShowData();
+            Clear();
+        },
+        error: function () {
+            alert("Not delete the data");
+        }
+    });
+}
+
+var IID = 0;
+
+function EditData(id) {
+    $.ajax({
+        url: 'Emp/EditData',
+        type: 'post',
+        data: { ID: id },
+        success: function (data) {
+            data = JSON.parse(data);
+            for (var i = 0; i < data.length; i++) {
+                $("#txtname").val(data[0].name);
+                $("#txtage").val(data[0].age);
+                $("#txtdob").val(data[0].dob);
+                $("#txtemail").val(data[0].email);
+                $("#txtpsw").val(data[0].psw);
+                $("#txtcon_psw").val(data[0].con_psw);
+                $("#btnsave").val("UPDATE");
+
+                IID = id;
+            }
+        },
+        error: function () {
+            alert("Not edit the data");
+        }
+    });
+}

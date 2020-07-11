@@ -1,0 +1,62 @@
+create database mvc050720
+use mvc050720
+
+create table tblEmp
+(
+    id int primary key identity,
+	name varchar(50),
+	age int,
+	dob varchar(50),
+	email varchar(50),
+	psw varchar(50),
+	con_psw varchar(50),
+	inserted_date date,
+	status int default 0
+)
+
+alter proc usp_tblEmp
+@action varchar(50)=null,
+@id int=0,
+@name varchar(50)=null,
+@age int=0,
+@dob varchar(50)=null,
+@email varchar(50)=null,
+@psw varchar(50)=null,
+@con_psw varchar(50)=null
+as
+begin
+        if(@action='insert')
+		begin
+		      insert into tblEmp(name,age,dob,email,psw,con_psw,inserted_date)values(@name,@age,@dob,@email,@psw,@con_psw,GETDATE())
+		end
+
+        else if(@action='show')
+		begin
+		      select *, CONVERT(varchar(50),inserted_date,106)idate  from tblEmp where status=0
+		end
+
+        else if(@action='delete')
+		begin
+		      update tblEmp set status=1 where id=@id
+		end
+
+        else if(@action='edit')
+		begin
+		      select *from tblEmp where id=@id
+		end
+
+        else if(@action='update')
+		begin
+		      update tblEmp set name=@name,age=@age,dob=@dob,email=@email, psw=@psw,con_psw=@con_psw where id=@id
+		end
+end
+
+
+select *from tblEmp
+
+truncate table tblEmp
+
+sp_helptext 'usp_tblEmp'
+
+select GETDATE()
+

@@ -1,0 +1,87 @@
+function Access() {
+    var dabba = "";
+
+    dabba += checkname();
+    dabba += checkage();
+    dabba += checkdob();
+    dabba += checkemail();
+    dabba += checkpaw();
+
+    if (dabba != "") {
+        alert(dabba);
+        return false;
+    }
+    else {
+        SaveData();
+    }
+}
+
+
+function checkname() {
+    var TB = $("#txtname");
+    var Exp = /^[a-z A-Z]+$/
+    if (TB.val() == "") {
+        return "Please enter your name\n";
+    }
+    else if (!Exp.test(TB.val())) {
+        return "Please enter only alphabetic charecters\n";
+    }
+    else {
+        return "";
+    }
+}
+
+function checkage() {
+    var TB = $("#txtage");
+    var Exp = /^[0-9]+$/
+    if (TB.val() == "") {
+        return "Please enter your age\n";
+    }
+    else if (!Exp.test(TB.val())) {
+        return "Please enter only numerical charecters\n";
+    }
+    else {
+        return "";
+    }
+}
+
+function checkdob() {
+    var TB = $("#txtdob");
+    if (TB.val() == "") {
+        return "Please enter your dob\n";
+    }
+    else {
+        return "";
+    }
+}
+
+function checkemail() {
+    var TB = $("#txtemail");
+    var Exp = /^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+.)+([a-zA-Z0-9]{2,4})+$/;
+    if (TB.val() == "") {
+        return "Please enter your email\n";
+    }
+    else if (!Exp.test(TB.val())) {
+        return "Please enter your  valid email\n";
+    }
+    else {
+        return "";
+    }
+}
+
+function checkpaw() {
+    var TB1 = $("#txtpsw");
+    var TB2 = $("#txtcon_psw");
+    if (TB1.val() == "") {
+        return "Please enter your password\n";
+    }
+    else if (TB2.val() == "") {
+        return "Please enter your confirm password\n";
+    }
+    else if (TB1.val() != TB2.val()) {
+        return "Password did not matched\n";
+    }
+    else {
+        return "";
+    }
+}
